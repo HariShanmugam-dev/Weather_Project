@@ -4,6 +4,12 @@
     height: 2.5em;
     transform: rotate(165deg);
   }
+  .loader p{
+    
+    width: 15em;
+    height: 2.5em;
+    transform: rotate(-165deg);
+  }
   .loader:before, .loader:after {
     content: "";
     position: absolute;
