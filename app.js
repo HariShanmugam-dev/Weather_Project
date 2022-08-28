@@ -20,9 +20,12 @@ const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", 
 const months = ["month", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 let main_temp = 0;
 let feel_temp = 0;
-
+const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 window.addEventListener('load', () => {
+    ani.hideall();
+
+
     let long;
     let lat;
 
@@ -44,7 +47,7 @@ window.addEventListener('load', () => {
                 .then(data => {
                     console.log(data);
                     const { main: { temp, humidity, feels_like },
-                        weather, wind: { speed }, timezone
+                        weather, wind: { speed }, timezone, name
                     } = data;
                     //set DOM Elements from the API
                     haritimezone = timezone;
@@ -62,28 +65,20 @@ window.addEventListener('load', () => {
                     const dateh = new Date();
                     const offset = dateh.getTimezoneOffset();
                     datefn.fulldate(offset);
+                    image.fetchImage(name);
 
 
                     iconpic.setAttribute("src", 'http://openweathermap.org/img/wn/' + icon + '@2x.png');
-
-
-
-
-
-
-
-
-
-
-
+                    ani.showall();
 
                     document.getElementById("search").addEventListener("click", function () {
-
+                        ani.hideall();
                         weatherr.search();
 
                     })
                     document.querySelector(".search-box").addEventListener("keyup", function (event) {
                         if (event.key == "Enter") {
+                            ani.hideall();
                             weatherr.search();
                         }
                     })
@@ -125,7 +120,7 @@ let weatherr = {
             .then(data => {
                 console.log(data);
                 const { main: { temp, humidity, feels_like },
-                    weather, wind: { speed }, timezone
+                    weather, wind: { speed }, timezone, name
                 } = data;
                 //set DOM Elements from the API
 
@@ -141,9 +136,10 @@ let weatherr = {
                 tempfeels.textContent = text_tempfeels + feels_like;
                 datefn.fulldate(timezone);
                 datefn.fulltime(timezone);
+                image.fetchImage(city);
 
                 iconpic.setAttribute("src", 'http://openweathermap.org/img/wn/' + icon + '@2x.png');
-
+                ani.showall();
             });
     },
     search: function () {
@@ -151,6 +147,39 @@ let weatherr = {
     }
 
 };
+let image = {
+    fetchImage: function (city) {
+        const access_key = "lgHMz6HybBNqJUYfy52_ye2jp44tJQWkF_KU-DZqeQI";
+        const api = 'https://api.unsplash.com/search/photos?query=' + city + '&per_page=10&orientation=portrait&page=1&client_id=' + access_key;
+
+
+        fetch(api)
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+                const { results } = data;
+                const { urls: { raw } } = results[0];
+                console.log(raw);
+                /*setTimeout(this.imageroll(raw),20000);*/
+                document.querySelector(".Photo").setAttribute("src", raw);
+
+                /*for (let i = 0; i < 10; i++) {
+                    const { urls: { raw } } = results[i];
+                    console.log(raw);
+                    /*setTimeout(this.imageroll(raw),20000);
+                    document.querySelector(".Photo").setAttribute("src", raw).fadeIn().delay(3000).fadeOut();
+                    /*$('.Photo').fadeIn().delay(3000).fadeOut();
+                   /* i = i==9?0:i;
+
+                }*/
+
+
+            });
+    }
+
+}
 let datefn = {
 
     fulldate: function (timezone) {
@@ -176,16 +205,16 @@ let datefn = {
         const min = time.substring(14, 16);
         if (haritimezone == timezone) {
             timetext.textContent = "Sorry the time difference wont work properly for the same timezone.";
-
+            $('#timetext').fadeIn().delay(3000).fadeOut();
         }
         else {
             const text_AMPM = +hours > 12 ? " PM. " : " AM. ";
             const timeahead = " ahead of us.";
             let timecal = "";
             var d = new Date();
-                    harihshours = d.getHours();
-                    harihsmin = d.getMinutes();
-                    harihsdate = d.getDate();
+            harihshours = d.getHours();
+            harihsmin = d.getMinutes();
+            harihsdate = d.getDate();
             if (harihsdate > date.getDate()) {
                 timeahead = " behind us."
                 var hourdiff = parseInt(hours) - harihshours;
@@ -202,6 +231,10 @@ let datefn = {
                 if (mindiff < 0) {
                     hourdiff -= 1;
                     mindiff *= -1;
+                }
+                if(hourdiff >24)
+                {
+                    hourdiff-=24;
                 }
 
                 console.log(hourdiff);
@@ -220,6 +253,26 @@ let datefn = {
     }
 
 };
+
+let ani = {
+    
+    hideall: function () {
+        document.querySelector(".loader").style.opacity ="1";
+        const nodeList = document.querySelectorAll("body > div:not(.loader)");
+        for (let i = 0; i < nodeList.length; i++) {
+            nodeList[i].style.opacity = "0";
+        }
+
+    },
+    showall: function() {
+        document.querySelector(".loader").style.opacity ="0";
+        const nodeList = document.querySelectorAll("body > div:not(.loader)");
+        for (let i = 0; i < nodeList.length; i++) {
+            nodeList[i].style.opacity = "1";
+        }
+
+    }
+}
 
 
 document.querySelector(".temprature").addEventListener("click", function () {
