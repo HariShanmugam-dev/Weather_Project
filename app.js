@@ -65,7 +65,15 @@ window.addEventListener('load', () => {
                     const dateh = new Date();
                     const offset = dateh.getTimezoneOffset();
                     datefn.fulldate(offset);
+                    image.fetchmode(dateh.getHours());
+
+if(screen.width<1300)
+{
+    document.querySelector(".photo-frame").style.display = "none";
+}
+else{
                     image.fetchImage(name);
+}
 
 
                     iconpic.setAttribute("src", 'http://openweathermap.org/img/wn/' + icon + '@2x.png');
@@ -136,8 +144,14 @@ let weatherr = {
                 tempfeels.textContent = text_tempfeels + feels_like;
                 datefn.fulldate(timezone);
                 datefn.fulltime(timezone);
-                image.fetchImage(city);
 
+if(screen.width<1300)
+{
+    document.querySelector(".photo-frame").style.display = "none";
+}
+else{
+                image.fetchImage(city);
+}
                 iconpic.setAttribute("src", 'http://openweathermap.org/img/wn/' + icon + '@2x.png');
                 ani.showall();
             });
@@ -177,6 +191,22 @@ let image = {
 
 
             });
+    },
+    fetchmode:function(hours){
+        console.log(hours);
+
+        if(hours > 18 || hours<7)
+        {
+            console.log("dark");
+    document.querySelector(".mode").classList.add("dark");
+    document.querySelector(".mode").classList.remove("light");
+        }
+        else{
+            console.log("lightmode activated");
+            document.querySelector(".mode").classList.add("light");
+    document.querySelector(".mode").classList.remove("dark");
+        }
+
     }
 
 }
@@ -203,6 +233,7 @@ let datefn = {
         time = date.toISOString();
         let hours = time.substring(11, 13);
         const min = time.substring(14, 16);
+        image.fetchmode(hours);
         if (haritimezone == timezone) {
             timetext.textContent = "Sorry the time difference wont work properly for the same timezone.";
             $('#timetext').fadeIn().delay(3000).fadeOut();

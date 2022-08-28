@@ -1,0 +1,74 @@
+html {
+	box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+}
+.light {
+	background: linear-gradient(45deg,rgb(47,150,163),rgb(48,62,143),#01CBFE,#77DCEF,#FFFCC1,#FED800,#FFBD00);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+	height: 100vh;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+    25%{
+        background-position: 0% 25%;
+    }
+	50% {
+		background-position: 100% 50%;
+	}
+    75%{
+        background-position: 0% 75%;
+    }
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+/* Container - Sky*/
+.light > #sky {
+	width: 100vw;
+	height: 100vh;
+}
+
+/* Sun  */
+.light > #sky > .theSun {
+	/*opacity: 1;
+	box-shadow: 0px 0px 15px 3px yellow;
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	top: 15vh;
+	left: 75vw;
+	animation: sunpulse 2s alternate infinite;
+	border-radius: 50%;
+	background-image: radial-gradient(circle, #ffd200 95%, #f7971e);*/
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+	top: 15vh;
+	left: 70vw;
+    z-index: 40;
+    background: linear-gradient(#ff0, #d00);
+    box-shadow: 0 0 40px 6px #f20, 0 0 150px 10px #f33;
+    animation: rise 7s;
+    
+}
+
+@keyframes rise {
+    from {
+      top:100vh;
+    }
+    to {
+      top: 15vh;
+    }
+  }
+

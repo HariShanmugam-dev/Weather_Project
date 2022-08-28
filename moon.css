@@ -1,0 +1,73 @@
+html {
+    box-sizing: border-box;
+}
+
+:root {
+    --sky-color1: #0E0619;
+    --sky-color2:#1D0C31;
+    --sky-color3: #3A1852;
+    --sky-color4: #7C397C;
+    --sky-color5: #F6A190;
+
+    --sky:linear-gradient(#0E0619 5%,#1D0C31 25%,#3A1852 60%,#7C397C 85%,#C68275 100%);
+    --sky-dark:linear-gradient(#0E0619 5%,#1D0C31 25%,#3A1852 60%,#4a224a 85%,#704941 100%);
+    --sky-dark2:linear-gradient(#030106 5%,#11071d 25%,#1f0d2d 75%);
+    --sky-dark3:linear-gradient(#030106 50%,#11071d 100%);
+
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+.dark {
+	background: linear-gradient(45deg,#0E0619,#1D0C31,#3A1852,#7C397C,#C68275);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+	height: 100vh;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+    25%{
+        background-position: 0% 25%;
+    }
+	50% {
+		background-position: 100% 50%;
+	}
+    75%{
+        background-position: 0% 75%;
+    }
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+/* Container - Sky*/
+.dark > #sky {
+
+    width: 100vw;
+    height: 100vh;
+}
+
+
+/* Sun  */
+.dark > #sky > .themoon {
+    
+    position: absolute;
+    top: 15vh;
+    left: 75vw;
+     transform: translate(-50%, -50%);
+     height: 100px;
+     width: 100px;
+     box-shadow: -15px 15px 0 5px white  ;
+     border-radius: 50%;
+     animation: rise 7s
+}
+
+.light > #sky > .thesun {
+    display: none;
+}
