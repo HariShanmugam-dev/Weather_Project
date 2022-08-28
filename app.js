@@ -10,7 +10,7 @@ let tempspan = document.querySelector(".degree-section span");
 let searchtext = document.querySelector(".search-text");
 let timetext = document.querySelector(".current-time");
 const apikeyvalue = "51c596882f565d5c8db2ca0cee72cd43";
-let harihsmin = 0, harihsdate = 0, harihshours = 0,haritimezone = 0;
+let harihsmin = 0, harihsdate = 0, harihshours = 0, haritimezone = 0;
 const text_tempfeels = "Feels like: ";
 const text_Humi = "Humidity : ";
 const text_Humi_unit = " % ";
@@ -44,7 +44,7 @@ window.addEventListener('load', () => {
                 .then(data => {
                     console.log(data);
                     const { main: { temp, humidity, feels_like },
-                        weather, wind: { speed },timezone
+                        weather, wind: { speed }, timezone
                     } = data;
                     //set DOM Elements from the API
                     haritimezone = timezone;
@@ -59,29 +59,28 @@ window.addEventListener('load', () => {
                     weatherHumidity.textContent = text_Humi + humidity + text_Humi_unit;
                     weatherWind.textContent = text_wind + speed + text_wind_unit;
                     tempfeels.textContent = text_tempfeels + feels_like;
-                    
+                    const dateh = new Date();
+                    const offset = dateh.getTimezoneOffset();
+                    datefn.fulldate(offset);
+
 
                     iconpic.setAttribute("src", 'http://openweathermap.org/img/wn/' + icon + '@2x.png');
 
 
-                    
-                    var d = new Date();
-                    harihshours = d.getHours();
-                    harihsmin = d.getMinutes();
-                    harihsdate = d.getDate();
-                    console.log(harihshours);
-                    console.log(harihsmin);
-                
 
 
 
 
-                    
+
+
+
+
+
 
                     document.getElementById("search").addEventListener("click", function () {
 
                         weatherr.search();
-                    
+
                     })
                     document.querySelector(".search-box").addEventListener("keyup", function (event) {
                         if (event.key == "Enter") {
@@ -99,8 +98,8 @@ window.addEventListener('load', () => {
     else {
         h1.textContent = "This wont work untill you have locations enabled.";
     }
-    
-    
+
+
 });
 
 //Search weather by location.
@@ -114,11 +113,11 @@ let weatherr = {
             + apikeyvalue
             + "&units=metric"
         ).then(response => {
-            
+
             if (!response.ok) {
                 searchtext.classList.add("err");
-              }
-            else{
+            }
+            else {
                 searchtext.classList.remove("err");
             }
             return response.json();
@@ -126,7 +125,7 @@ let weatherr = {
             .then(data => {
                 console.log(data);
                 const { main: { temp, humidity, feels_like },
-                    weather, wind: { speed },timezone
+                    weather, wind: { speed }, timezone
                 } = data;
                 //set DOM Elements from the API
 
@@ -155,67 +154,69 @@ let weatherr = {
 let datefn = {
 
     fulldate: function (timezone) {
-        
+
         console.log(timezone);
         let dateatt = document.querySelector(".current-date");
         let dayatt = document.querySelector(".current-day");
-        var date = new Date((new Date().getTime())+timezone*1000);
+        var date = new Date((new Date().getTime()) + timezone * 1000);
         const dateFormat = date.toDateString();
-    
-        dateatt.innerHTML = dateFormat.substring(4,15);
+
+        dateatt.innerHTML = dateFormat.substring(4, 15);
         dayatt.innerHTML = days[date.getDay()];
 
-        
-               
+
+
 
     },
-    fulltime: function(timezone){
+    fulltime: function (timezone) {
         timetext.classList.add("current-time-active");
-        var date = new Date((new Date().getTime())+timezone*1000);
+        var date = new Date((new Date().getTime()) + timezone * 1000);
         time = date.toISOString();
-        let hours = time.substring(11,13);
-        const min = time.substring(14,16);
-        if(haritimezone == timezone)
-        {
+        let hours = time.substring(11, 13);
+        const min = time.substring(14, 16);
+        if (haritimezone == timezone) {
             timetext.textContent = "Sorry the time difference wont work properly for the same timezone.";
 
         }
-        else{
+        else {
             const text_AMPM = +hours > 12 ? " PM. " : " AM. ";
-        const timeahead = " ahead of us.";
-        let timecal = "";
-        if(harihsdate > date.getDate())
-        {
-            timeahead = " behind us."
-            var hourdiff = parseInt(hours) - harihshours ;
-            var mindiff = parseInt(min) - harihsmin;
+            const timeahead = " ahead of us.";
+            let timecal = "";
+            var d = new Date();
+                    harihshours = d.getHours();
+                    harihsmin = d.getMinutes();
+                    harihsdate = d.getDate();
+            if (harihsdate > date.getDate()) {
+                timeahead = " behind us."
+                var hourdiff = parseInt(hours) - harihshours;
+                var mindiff = parseInt(min) - harihsmin;
 
-            //console.log(hourdiff);
-            timecal = (hourdiff)+"hours "+(mindiff)+"min"; 
-        }
-        else{
-            console
-            var hourdiff = 24 - harihshours + parseInt(hours);
-            var mindiff = parseInt(min) - harihsmin;
-
-            if(mindiff < 0){
-                hourdiff-=1;
-                mindiff*=-1;
+                //console.log(hourdiff);
+                timecal = (hourdiff) + "hours " + (mindiff) + "min";
             }
+            else {
+                console
+                var hourdiff = 24 - harihshours + parseInt(hours);
+                var mindiff = parseInt(min) - harihsmin;
 
-            //console.log(hourdiff);
-            timecal = (hourdiff)+"hours "+(mindiff)+"min";
+                if (mindiff < 0) {
+                    hourdiff -= 1;
+                    mindiff *= -1;
+                }
+
+                console.log(hourdiff);
+                timecal = (hourdiff) + "hours " + (mindiff) + "min";
+
+            }
+            // console.log(date.getTime());
+
+            hours = hours > 12 ? hours - 12 : hours;
+            timetext.textContent =
+                "It's " + hours + ":" + min + text_AMPM
+                + timecal + timeahead;
 
         }
-        console.log(date.getTime());
 
-        hours = hours > 12 ? hours-12 : hours;
-        timetext.textContent = 
-        "It's "+ hours + ":"+min+ text_AMPM
-        +timecal+timeahead;
-
-        }
-        
     }
 
 };
