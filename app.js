@@ -11,6 +11,8 @@ let searchtext = document.querySelector(".search-text");
 let timetext = document.querySelector(".current-time");
 const apikeyvalue = "51c596882f565d5c8db2ca0cee72cd43";
 let harihsmin = 0, harihsdate = 0, harihshours = 0, haritimezone = 0;
+
+//Text contents
 const text_tempfeels = "Feels like: ";
 const text_Humi = "Humidity : ";
 const text_Humi_unit = " % ";
@@ -18,10 +20,13 @@ const text_wind = "Wind : ";
 const text_wind_unit = " Km/h ";
 const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 const months = ["month", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+
 let main_temp = 0;
 let feel_temp = 0;
 const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
+//On load events
 window.addEventListener('load', () => {
     ani.hideall();
 
@@ -67,17 +72,18 @@ window.addEventListener('load', () => {
                     datefn.fulldate(offset);
                     image.fetchmode(dateh.getHours());
 
-if(screen.width<1300)
-{
-    document.querySelector(".photo-frame").style.display = "none";
-}
-else{
-                    image.fetchImage(name);
-}
+                    //for mobile photo frame is removed
+                    if (screen.width < 1300) {
+                        document.querySelector(".photo-frame").style.display = "none";
+                    }
+                    else {
+                        image.fetchImage(name);
+                    }
 
 
                     iconpic.setAttribute("src", 'http://openweathermap.org/img/wn/' + icon + '@2x.png');
                     ani.showall();
+                    //On search events
 
                     document.getElementById("search").addEventListener("click", function () {
                         ani.hideall();
@@ -145,13 +151,12 @@ let weatherr = {
                 datefn.fulldate(timezone);
                 datefn.fulltime(timezone);
 
-if(screen.width<1300)
-{
-    document.querySelector(".photo-frame").style.display = "none";
-}
-else{
-                image.fetchImage(city);
-}
+                if (screen.width < 1300) {
+                    document.querySelector(".photo-frame").style.display = "none";
+                }
+                else {
+                    image.fetchImage(city);
+                }
                 iconpic.setAttribute("src", 'http://openweathermap.org/img/wn/' + icon + '@2x.png');
                 ani.showall();
             });
@@ -161,6 +166,8 @@ else{
     }
 
 };
+
+//Search images by location
 let image = {
     fetchImage: function (city) {
         const access_key = "lgHMz6HybBNqJUYfy52_ye2jp44tJQWkF_KU-DZqeQI";
@@ -176,40 +183,29 @@ let image = {
                 const { results } = data;
                 const { urls: { raw } } = results[0];
                 console.log(raw);
-                /*setTimeout(this.imageroll(raw),20000);*/
+               
                 document.querySelector(".Photo").setAttribute("src", raw);
-
-                /*for (let i = 0; i < 10; i++) {
-                    const { urls: { raw } } = results[i];
-                    console.log(raw);
-                    /*setTimeout(this.imageroll(raw),20000);
-                    document.querySelector(".Photo").setAttribute("src", raw).fadeIn().delay(3000).fadeOut();
-                    /*$('.Photo').fadeIn().delay(3000).fadeOut();
-                   /* i = i==9?0:i;
-
-                }*/
 
 
             });
     },
-    fetchmode:function(hours){
+    fetchmode: function (hours) {
         console.log(hours);
 
-        if(hours > 18 || hours<7)
-        {
-            console.log("dark");
-    document.querySelector(".mode").classList.add("dark");
-    document.querySelector(".mode").classList.remove("light");
+        if (hours > 18 || hours < 7) {   
+            document.querySelector(".mode").classList.add("dark");
+            document.querySelector(".mode").classList.remove("light");
         }
-        else{
-            console.log("lightmode activated");
+        else {  
             document.querySelector(".mode").classList.add("light");
-    document.querySelector(".mode").classList.remove("dark");
+            document.querySelector(".mode").classList.remove("dark");
         }
 
     }
 
 }
+
+//show date by loation
 let datefn = {
 
     fulldate: function (timezone) {
@@ -222,10 +218,6 @@ let datefn = {
 
         dateatt.innerHTML = dateFormat.substring(4, 15);
         dayatt.innerHTML = days[date.getDay()];
-
-
-
-
     },
     fulltime: function (timezone) {
         timetext.classList.add("current-time-active");
@@ -250,8 +242,6 @@ let datefn = {
                 timeahead = " behind us."
                 var hourdiff = parseInt(hours) - harihshours;
                 var mindiff = parseInt(min) - harihsmin;
-
-                //console.log(hourdiff);
                 timecal = (hourdiff) + "hours " + (mindiff) + "min";
             }
             else {
@@ -263,17 +253,14 @@ let datefn = {
                     hourdiff -= 1;
                     mindiff *= -1;
                 }
-                if(hourdiff >24)
-                {
-                    hourdiff-=24;
+                if (hourdiff > 24) {
+                    hourdiff -= 24;
                 }
 
-                console.log(hourdiff);
+                
                 timecal = (hourdiff) + "hours " + (mindiff) + "min";
 
             }
-            // console.log(date.getTime());
-
             hours = hours > 12 ? hours - 12 : hours;
             timetext.textContent =
                 "It's " + hours + ":" + min + text_AMPM
@@ -285,18 +272,19 @@ let datefn = {
 
 };
 
+//loader animation
 let ani = {
-    
+
     hideall: function () {
-        document.querySelector(".loader").style.opacity ="1";
+        document.querySelector(".loader").style.opacity = "1";
         const nodeList = document.querySelectorAll("body > div:not(.loader)");
         for (let i = 0; i < nodeList.length; i++) {
             nodeList[i].style.opacity = "0";
         }
 
     },
-    showall: function() {
-        document.querySelector(".loader").style.opacity ="0";
+    showall: function () {
+        document.querySelector(".loader").style.opacity = "0";
         const nodeList = document.querySelectorAll("body > div:not(.loader)");
         for (let i = 0; i < nodeList.length; i++) {
             nodeList[i].style.opacity = "1";
@@ -305,6 +293,7 @@ let ani = {
     }
 }
 
+//Farenheit to Celsius conversion
 
 document.querySelector(".temprature").addEventListener("click", function () {
     //Formula for converting celsius to degree

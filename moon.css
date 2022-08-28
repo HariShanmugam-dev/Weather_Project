@@ -65,7 +65,7 @@ html {
      width: 100px;
      box-shadow: -15px 15px 0 5px white  ;
      border-radius: 50%;
-     animation: rise 7s
+     animation: rise 7s;
 }
 
 .light > #sky > .thesun {
