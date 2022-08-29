@@ -50,7 +50,7 @@ window.addEventListener('load', () => {
                     return response.json();
                 })
                 .then(data => {
-                    console.log(data);
+                    
                     const { main: { temp, humidity, feels_like },
                         weather, wind: { speed }, timezone, name
                     } = data;
@@ -132,7 +132,7 @@ let weatherr = {
             return response.json();
         })
             .then(data => {
-                console.log(data);
+                
                 const { main: { temp, humidity, feels_like },
                     weather, wind: { speed }, timezone, name
                 } = data;
@@ -179,10 +179,10 @@ let image = {
                 return response.json();
             })
             .then(data => {
-                console.log(data);
+               
                 const { results } = data;
                 const { urls: { raw } } = results[0];
-                console.log(raw);
+                
                
                 document.querySelector(".Photo").setAttribute("src", raw);
 
@@ -190,7 +190,7 @@ let image = {
             });
     },
     fetchmode: function (hours) {
-        console.log(hours);
+        
 
         if (hours > 18 || hours < 7) {   
             document.querySelector(".mode").classList.add("dark");
@@ -210,7 +210,6 @@ let datefn = {
 
     fulldate: function (timezone) {
 
-        console.log(timezone);
         let dateatt = document.querySelector(".current-date");
         let dayatt = document.querySelector(".current-day");
         var date = new Date((new Date().getTime()) + timezone * 1000);
@@ -245,7 +244,7 @@ let datefn = {
                 timecal = (hourdiff) + "hours " + (mindiff) + "min";
             }
             else {
-                console
+            
                 var hourdiff = 24 - harihshours + parseInt(hours);
                 var mindiff = parseInt(min) - harihsmin;
 
