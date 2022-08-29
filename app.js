@@ -195,10 +195,16 @@ let image = {
         if (hours > 18 || hours < 7) {   
             document.querySelector(".mode").classList.add("dark");
             document.querySelector(".mode").classList.remove("light");
+            $(':root').css('--main-color', '#ffffff');
         }
         else {  
+            document.querySelector(".search-box").style.setProperty("animation","search_text_anim 15s ease infinite");
+            document.getElementById("search").style.setProperty("animation","search_text_anim 15s ease infinite");
             document.querySelector(".mode").classList.add("light");
             document.querySelector(".mode").classList.remove("dark");
+            $(':root').css('--main-color', '#000000');
+            
+
         }
 
     }

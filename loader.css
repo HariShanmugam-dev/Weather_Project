@@ -9,6 +9,19 @@
     width: 15em;
     height: 2.5em;
     transform: rotate(-165deg);
+    animation: timer 20s ease;
+  }
+  @keyframes timer {
+    0%{
+      opacity: 0;
+    }
+    50%{
+      opacity: 0;
+    }
+    100%{
+      opacity: 1;
+    }
+    
   }
   .loader:before, .loader:after {
     content: "";

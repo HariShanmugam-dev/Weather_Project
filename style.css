@@ -133,7 +133,8 @@ border: 1px solid rgba(255, 255, 255, 0.4);
     height: 60px;
     border-radius: 30px;
     border: none;
-    color: white;
+    color:var(--main-color);
+    /*animation: search_text_anim 15s ease infinite;*/
     cursor: pointer;
 }
 #search:active{
@@ -144,14 +145,15 @@ border: 1px solid rgba(255, 255, 255, 0.4);
     background-color: rgba(217,217,217,0.5);
     border-radius: 30px;
     border: none;
-    color: white;
+    color:var(--main-color);
+   /*animation: search_text_anim 15s ease infinite;*/
     font-size: 20px;
     padding : 14px 20px;
     flex-grow: 1;
 }
 
 .search-box::placeholder{
-    color: white;
+    color:var(--main-color);
     font-size: 16px;
     font-family:Space Grotesk;
 }
@@ -204,4 +206,29 @@ border: 1px solid rgba(255, 255, 255, 0.4);
 .weather-desc{
     justify-content: left;
     margin-bottom: 3 rem;
+}
+
+@keyframes search_text_anim {
+	0% {
+		color: white;
+	}
+    25%{
+        color: white;
+    }
+    30%{
+        color: black;
+    }
+	50% {
+		
+		color: black;
+	}
+    65%{
+        color: black;
+    }
+    75%{
+       color: white;
+    }
+	100% {
+		color: white;
+	}
 }
