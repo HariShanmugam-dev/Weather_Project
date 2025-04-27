@@ -90,8 +90,8 @@ env WEATHER_API_KEY=your_api_key_here
 ---
 
 ## 📈 Screenshots
-
-
+![Weather App Home](assets/loaded.png)
+![Weather App Home](assets/loading.png)
 ---
 
 ## 🧪 Testing
