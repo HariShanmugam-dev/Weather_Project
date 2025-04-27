@@ -50,8 +50,7 @@ Weather_Project/
 1. **Clone the Repository**
    ```bash
 git clone https://github.com/HariShanmugam-dev/Weather_Project.git
-cd Weather_Project
-```
+cd Weather_Project```
 
 2. **Obtain an API Key**
    - Sign up at [OpenWeatherMap](https://openweathermap.org/) to get your free API key.
