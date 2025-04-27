@@ -1,25 +1,25 @@
-# Weather App
+Weather App
 
-![Weather App Demo](https://github.com/HariShanmugam-dev/Weather_Project/assets/demo.png)
 
----
 
-## 🚀 Overview
+🚀 Overview
 
-Welcome to the **Weather App**, a sleek, retro-inspired web application that brings real-time weather data right to your fingertips. Built with pure HTML, CSS, and JavaScript, this project showcases modern API integration and responsive design in a minimalistic package.
+Welcome to the Weather App, a sleek, retro-inspired web application that brings real-time weather data right to your fingertips. Built with pure HTML, CSS, and JavaScript, this project showcases modern API integration and responsive design in a minimalistic package.
 
 Key Features:
-- 🌍 **Geolocation Integration**: Automatically fetches and displays the current weather for the user's location.
-- 🔍 **Search Functionality**: Allows users to search for weather by city name.
-- 🌡️ **Real-Time API Calls**: Utilizes a public weather API to fetch up-to-date conditions.
-- 📱 **Responsive Design**: Adapts seamlessly to any device, from desktop to mobile.
-- 🎨 **Retro Theme**: Dark theme with colorful accents for a nostalgic feel.
 
----
+🌍 Geolocation Integration: Automatically fetches and displays the current weather for the user's location.
 
-## 📂 Project Structure
+🔍 Search Functionality: Allows users to search for weather by city name.
 
-```bash
+🌡️ Real-Time API Calls: Utilizes a public weather API to fetch up-to-date conditions.
+
+📱 Responsive Design: Adapts seamlessly to any device, from desktop to mobile.
+
+🎨 Retro Theme: Dark theme with colorful accents for a nostalgic feel.
+
+📂 Project Structure
+
 Weather_Project/
 ├── index.html       # Main HTML file
 ├── css/
@@ -31,97 +31,99 @@ Weather_Project/
 │   └── demo.png     # Demo screenshot for README
 ├── .gitignore       # Git ignore rules
 └── README.md        # Project documentation
-```
 
----
+🛠️ Technologies Used
 
-## 🛠️ Technologies Used
+HTML5 & CSS3: Structure and styling
 
-- **HTML5 & CSS3**: Structure and styling
-- **Vanilla JavaScript**: Application logic and API interactions
-- **OpenWeatherMap API**: Real-time weather data
-- **Axios (optional)**: Promise-based HTTP client for cleaner API calls
-- **Responsive Design**: Media queries for device compatibility
+Vanilla JavaScript: Application logic and API interactions
 
----
+OpenWeatherMap API: Real-time weather data
 
-## 🔧 Installation & Setup
+Axios (optional): Promise-based HTTP client for cleaner API calls
 
-1. **Clone the Repository**
-   ```bash
+Responsive Design: Media queries for device compatibility
+
+🔧 Installation & Setup
+
+Clone the Repository
+
 git clone https://github.com/HariShanmugam-dev/Weather_Project.git
-cd Weather_Project```
+cd Weather_Project
 
-2. **Obtain an API Key**
+Obtain an API Key
+
    - Sign up at [OpenWeatherMap](https://openweathermap.org/) to get your free API key.
+
    - Create a `.env` file in the root directory and add:
-     ```env
-   WEATHER_API_KEY=your_api_key_here
-   ```
 
-3. **Run Locally**
-   - Since this is a static site, you can simply open `index.html` in your browser, or
-   - Use a local HTTP server for better CORS handling:
-     ```bash
-   # Using Python 3
-   python -m http.server 8000
-   # Using Node.js
-   npx http-server .
-   ```
+```env WEATHER_API_KEY=your_api_key_here```
 
-4. **View the App**
-   Visit `http://localhost:8000` in your browser.
+Run Locally
 
----
+Since this is a static site, you can simply open index.html in your browser, or
 
-## 💡 Usage
+Use a local HTTP server for better CORS handling:
 
-- On page load, grant location access to see your current weather conditions.
-- Use the search bar to type any city name and press **Enter** or click **Search**.
-- The app displays:
-  - Current temperature (°C/°F)
-  - Weather description (e.g., Clear, Rain, Clouds)
-  - Humidity, wind speed, and more
+Using Python 3
 
----
+```python -m http.server 8000```
 
-## 📈 Screenshots
+Using Node.js
 
-![Home Screen](https://github.com/HariShanmugam-dev/Weather_Project/assets/home.png)
+```npx http-server ```
 
----
 
-## 🧪 Testing
+View the App
+Visit http://localhost:8000 in your browser.
 
-- Manual testing across desktop, tablet, and mobile viewports.
-- Verified API error handling for invalid city names.
+💡 Usage
 
----
+On page load, grant location access to see your current weather conditions.
 
-## 🤝 Contributing
+Use the search bar to type any city name and press Enter or click Search.
+
+The app displays:
+
+Current temperature (°C/°F)
+
+Weather description (e.g., Clear, Rain, Clouds)
+
+Humidity, wind speed, and more
+
+📈 Screenshots
+
+
+
+🧪 Testing
+
+Manual testing across desktop, tablet, and mobile viewports.
+
+Verified API error handling for invalid city names.
+
+🤝 Contributing
 
 Contributions are welcome! Please fork the repo and open a pull request with your improvements.
 
-1. Fork it
-2. Create your feature branch (`git checkout -b new-feature`)
-3. Commit your changes (`git commit -m 'Add some feature'`)
-4. Push to the branch (`git push origin new-feature`)
-5. Open a Pull Request
+Fork it
 
----
+Create your feature branch (git checkout -b new-feature)
 
-## 📜 License
+Commit your changes (git commit -m 'Add some feature')
 
-This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+Push to the branch (git push origin new-feature)
 
----
+Open a Pull Request
 
-## 🙏 Acknowledgements
+📜 License
 
-- Thanks to [OpenWeatherMap](https://openweathermap.org/) for the API
-- Inspired by retro UI designs and classic gaming interfaces
+This project is licensed under the MIT License. See LICENSE for details.
 
----
+🙏 Acknowledgements
 
-*Developed by Hari Hara Sudhan Shanmugam*
+Thanks to OpenWeatherMap for the API
+
+Inspired by retro UI designs and classic gaming interfaces
+
+Developed by Hari Hara Sudhan Shanmugam
 
